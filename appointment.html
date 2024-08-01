@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Scheduling - HealthPal SG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #FF4E50;
+            background: -webkit-linear-gradient(to right, #F9D423, #FF4E50);
+            background: linear-gradient(to right, #F9D423, #FF4E50);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        h2 {
+            color: black;
+        }
+        .form-container, .appointments-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, .book {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        .book {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .book:hover {
+            background-color: #218838;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .title {
+            background: linear-gradient(to right, #F9D423, #FF4E50);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.png" alt="Healthcare Wallet Logo">
+            HealthPal SG
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto mr-auto" id="navLinks">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="HSA_account.html">HSA Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="insurance.html">Insurance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="medical_bill.html">Medical Bill Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="appointment.html">Appointment</a>
+                </li>
+            </ul>
+            <a class="nav-link" href="signup.html" id="signupLink">Sign Up</a>
+            <span id="welcomeUser"></span>
+            <a class="nav-link" href="login.html" id="loginLink">Login</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-container">
+            <form id="appointment-form">
+                <h2 class="title">Book Appointment</h2>
+                <label for="doctor">Select Doctor:</label>
+                <select id="doctor" name="doctor">
+                    <option value="dr-john-doe">Dr. John Doe</option>
+                    <option value="dr-jane-smith">Dr. Jane Smith</option>
+                    <option value="dr-emily-johnson">Dr. Emily Johnson</option>
+                </select>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+                <button type="submit" class="book">Book Appointment</button>
+            </form>
+        </div>
+
+        <div class="appointments-container">
+            <h2>Upcoming Appointments</h2>
+            <ul id="appointments-list">
+                <!-- Appointments will be displayed here -->
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Healthcare Wallet. All rights reserved.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to check if user is logged in
+        function checkUser() {
+            const username = localStorage.getItem('username');
+            if (username) {
+                document.getElementById('signupLink').style.display = 'none';
+                document.getElementById('loginLink').style.display = 'none';
+                const welcomeUser = document.getElementById('welcomeUser');
+                welcomeUser.innerHTML = `<a class="nav-link" href="#">Welcome, ${username}</a><button class="btn btn-link nav-link" onclick="logout()">Logout</button>`;
+            }
+        }
+
+        // Function to logout the user
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', checkUser);
+
+        // Function to book an appointment
+        function bookAppointment(event) {
+            event.preventDefault();
+            
+            const doctor = document.getElementById('doctor').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            const appointment = { doctor, date, time };
+            let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            appointments.push(appointment);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+            
+            displayAppointments();
+            alert('Appointment booked successfully!');
+        }
+
+        // Function to display upcoming appointments
+        function displayAppointments() {
+            const appointmentsList = document.getElementById('appointments-list');
+            appointmentsList.innerHTML = '';
+
+            const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            appointments.forEach((appointment, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Doctor: ${appointment.doctor}, Date: ${appointment.date}, Time: ${appointment.time}`;
+                appointmentsList.appendChild(listItem);
+            });
+        }
+
+        document.getElementById('appointment-form').addEventListener('submit', bookAppointment);
+
+        document.addEventListener('DOMContentLoaded', displayAppointments);
+    </script>
+</body>
+</html>

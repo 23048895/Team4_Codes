@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSA Account - HealthPal SG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #FF4E50;
+            background: -webkit-linear-gradient(to right, #F9D423, #FF4E50);
+            background: linear-gradient(to right, #F9D423, #FF4E50);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2em;
+        }
+        table {
+            margin-top: 50px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .payment-history, .transaction-history {
+            margin-top: 30px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            display: flex;
+            justify-content: center; 
+            gap: 20px;
+        }
+        button {
+            background-color: yellow;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button a {
+            text-decoration: none;
+            color: black;
+        }
+        button:hover {
+            background-color: #ffc107;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" alt="HealthPal SG Logo">
+            HealthPal SG
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto mr-auto" id="navLinks">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="HSA_account.html">HSA Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="insurance.html">Insurance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="medical_bill.html">Medical Bill Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="appointment.html">Appointment</a>
+                </li>
+            </ul>
+            
+            <a class="nav-link" href="signup.html" id="signupLink">Sign Up</a>
+            <span id="welcomeUser"></span>
+            <a class="nav-link" href="login.html" id="loginLink">Login</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Account Balance:</h1>
+        <h2 id="accountBalance">$0.00</h2>
+
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hospital Name</th>
+                        <th>Details</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Singapore General Hospital</td>
+                        <td>Chemotherapy</td>
+                        <td>$1200</td>
+                        <td>2024-07-12</td>
+                        <td>Pending</td>
+                    </tr>
+                    <tr>
+                        <td>Raffles Medical Group</td>
+                        <td>Blood Test</td>
+                        <td>Free</td>
+                        <td>2024-07-12</td>
+                        <td>Pending</td>
+                    </tr>
+                    <tr>
+                        <td>Q & M Dental Group</td>
+                        <td>Dental Filling</td>
+                        <td>$10.00</td>
+                        <td>2024-05-06</td>
+                        <td>Pending</td>
+                    </tr>
+                    <tr>
+                        <td>Raffles Medical Group</td>
+                        <td>Chicken Pox</td>
+                        <td>$60.00</td>
+                        <td>2024-07-01</td>
+                        <td>Pending</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="payment-history">
+            <h3>Payment History</h3>
+            <ul>
+                <li>Paid $200 to Singapore General Hospital on 2024-06-01 via Credit Card</li>
+                <li>Paid $150 to Q & M Dental Group on 2024-07-01 via HSA</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <button onclick="topUp()">Top Up</button>
+        <button onclick="loan()">Loan</button>
+        <button onclick="withdraw()">Withdraw</button>
+    </footer>
+
+    <br>
+    <div class="footer">
+        <p>&copy; 2024 Healthcare Wallet. All rights reserved.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to check if user is logged in
+        function checkUser() {
+            const username = localStorage.getItem('username');
+            if (username) {
+                document.getElementById('signupLink').style.display = 'none';
+                document.getElementById('loginLink').style.display = 'none';
+                const welcomeUser = document.getElementById('welcomeUser');
+                welcomeUser.innerHTML = `<a class="nav-link" href="#">Welcome, ${username}</a><button class="btn btn-link nav-link" onclick="logout()">Logout</button>`;
+            }
+        }
+
+        // Function to logout the user
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+
+        // Function to get current balance
+        function getBalance() {
+            return parseFloat(document.getElementById('accountBalance').textContent.replace('$', ''));
+        }
+
+        // Function to set current balance
+        function setBalance(amount) {
+            document.getElementById('accountBalance').textContent = `$${amount.toFixed(2)}`;
+        }
+
+        // Function to top up balance
+        function topUp() {
+            const amount = parseFloat(prompt('Enter amount to top up:'));
+            if (!isNaN(amount) && amount > 0) {
+                const currentBalance = getBalance();
+                setBalance(currentBalance + amount);
+                alert('Top up successful!');
+            } else {
+                alert('Invalid amount.');
+            }
+        }
+
+        // Function to take a loan
+        function loan() {
+            const amount = parseFloat(prompt('Enter loan amount:'));
+            if (!isNaN(amount) && amount > 0) {
+                const currentBalance = getBalance();
+                const loanDeadline = new Date();
+                loanDeadline.setMonth(loanDeadline.getMonth() + 1);
+                setBalance(currentBalance + amount);
+                alert(`Loan successful! Repayment deadline: ${loanDeadline.toDateString()}`);
+            } else {
+                alert('Invalid amount.');
+            }
+        }
+
+        // Function to withdraw balance
+        function withdraw() {
+            const amount = parseFloat(prompt('Enter amount to withdraw:'));
+            if (!isNaN(amount) && amount > 0) {
+                const currentBalance = getBalance();
+                if (amount <= currentBalance) {
+                    setBalance(currentBalance - amount);
+                    alert('Withdrawal successful!');
+                } else {
+                    alert('Insufficient balance.');
+                }
+            } else {
+                alert('Invalid amount.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', checkUser);
+    </script>
+</body>
+</html>

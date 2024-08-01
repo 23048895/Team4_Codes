@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance - HealthPal SG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #FF4E50;
+            background: -webkit-linear-gradient(to right, #F9D423, #FF4E50);
+            background: linear-gradient(to right, #F9D423, #FF4E50);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2em;
+        }
+        table {
+            margin-top: 50px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .payment-history, .transaction-history {
+            margin-top: 30px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            display: flex;
+            justify-content: center; 
+            gap: 20px;
+        }
+        button {
+            background-color: yellow;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button a {
+            text-decoration: none;
+            color: black;
+        }
+        button:hover {
+            background-color: #ffc107;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" alt="HealthPal SG Logo">
+            HealthPal SG
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto mr-auto" id="navLinks">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="HSA_account.html">HSA Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="insurance.html">Insurance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="medical_bill.html">Medical Bill Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="appointment.html">Appointment</a>
+                </li>
+            </ul>
+            
+            <a class="nav-link" href="signup.html" id="signupLink">Sign Up</a>
+            <span id="welcomeUser"></span>
+            <a class="nav-link" href="login.html" id="loginLink">Login</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Your Insurance</h1>
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Insurance Provider</th>
+                        <th>Policy Type</th>
+                        <th>Claim Amount</th>
+                        <th>Claim Date</th>
+                        <th>Claim Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Singapore Insurance Company</td>
+                        <td>Health Insurance</td>
+                        <td>$1200</td>
+                        <td>2024-07-12</td>
+                        <td>Pending</td>
+                    </tr>
+                    <tr>
+                        <td>Singapore Life Insurance</td>
+                        <td>Life Insurance</td>
+                        <td>$10000</td>
+                        <td>2024-07-10</td>
+                        <td>Approved</td>
+                    </tr>
+                    <tr>
+                        <td>NTUC Income</td>
+                        <td>Travel Insurance</td>
+                        <td>$500</td>
+                        <td>2024-06-30</td>
+                        <td>Rejected</td>
+                    </tr>
+                    <tr>
+                        <td>AIA Singapore</td>
+                        <td>Medical Insurance</td>
+                        <td>$800</td>
+                        <td>2024-07-05</td>
+                        <td>Approved</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <div class="container">
+        <h1>Insurance List</h1>
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Insurance Provider</th>
+                        <th>Policy Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AXA Insurance Singapore</td>
+                        <td>Health Insurance</td>
+                        <td><a href="#" class="btn btn-primary">View Details</a> | <a href="#" class="btn btn-success">Purchase</a></td>
+                    </tr>
+                    <tr>
+                        <td>Prudential Assurance Company Singapore</td>
+                        <td>Life Insurance</td>
+                        <td><a href="#" class="btn btn-primary">View Details</a> | <a href="#" class="btn btn-success">Purchase</a></td>
+                    </tr>
+                    <tr>
+                        <td>Great Eastern Life</td>
+                        <td>Travel Insurance</td>
+                        <td><a href="#" class="btn btn-primary">View Details</a> | <a href="#" class="btn btn-success">Purchase</a></td>
+                    </tr>
+                    <tr>
+                        <td>NTUC Income</td>
+                        <td>Medical Insurance</td>
+                        <td><a href="#" class="btn btn-primary">View Details</a> | <a href="#" class="btn btn-success">Purchase</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2024 Healthcare Wallet. All rights reserved.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to check if user is logged in
+        function checkUser() {
+            const username = localStorage.getItem('username');
+            if (username) {
+                document.getElementById('signupLink').style.display = 'none';
+                document.getElementById('loginLink').style.display = 'none';
+                const welcomeUser = document.getElementById('welcomeUser');
+                welcomeUser.innerHTML = `<a class="nav-link" href="#">Welcome, ${username}</a><button class="btn btn-link nav-link" onclick="logout()">Logout</button>`;
+            }
+        }
+
+        // Function to logout the user
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', checkUser);
+    </script>
+</body>
+</html>
